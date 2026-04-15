@@ -1,0 +1,24 @@
+Sample 1
+  Source   : good afternoon
+  Reference: guten tag
+  Generated: <unk>
+
+Sample 2
+  Source   : i like coffee
+  Reference: ich mag kaffee
+  Generated: ich mag <unk>
+
+Sample 3
+  Source   : you have time
+  Reference: du hast zeit
+  Generated: <unk>
+
+Sample 4
+  Source   : we need water
+  Reference: wir brauchen wasser
+  Generated: <unk>
+
+Sample 5
+  Source   : they see the house
+  Reference: sie sehen das haus
+  Generated: ich sehe <unk>

@@ -1,0 +1,4 @@
+experiment_name,preset_name,attention_type,num_heads,num_kv_heads,ffn_type,use_moe,num_experts,top_k_experts,params,best_epoch,best_val_loss,final_train_loss,final_val_loss
+mqa_dense,mqa,mqa,8,1,dense_ffn,False,0,0,6018560,6,2.1827447414398193,2.318621873855591,2.1827447414398193
+baseline_gqa_dense,baseline,gqa,8,4,dense_ffn,False,0,0,6610688,6,2.1048688888549805,1.9839527606964111,2.1048688888549805
+gqa_moe,moe,gqa,8,4,moe_ffn,True,4,2,19232544,6,2.201630115509033,1.9302861094474792,2.201630115509033
