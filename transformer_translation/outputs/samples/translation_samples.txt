@@ -1,0 +1,24 @@
+Sample 1
+  Source   : hello
+  Reference: hallo
+  Generated: hallo
+
+Sample 2
+  Source   : good morning
+  Reference: guten morgen
+  Generated: guten morgen
+
+Sample 3
+  Source   : good night
+  Reference: gute nacht
+  Generated: gute nacht
+
+Sample 4
+  Source   : thank you
+  Reference: danke
+  Generated: danke
+
+Sample 5
+  Source   : see you later
+  Reference: bis spaeter
+  Generated: bis spaeter
