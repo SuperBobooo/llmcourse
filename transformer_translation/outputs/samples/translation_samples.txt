@@ -1,24 +1,24 @@
 Sample 1
-  Source   : hello
-  Reference: hallo
-  Generated: hallo
+  Source   : good afternoon
+  Reference: guten tag
+  Generated: <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>
 
 Sample 2
-  Source   : good morning
-  Reference: guten morgen
-  Generated: guten morgen
+  Source   : i like coffee
+  Reference: ich mag kaffee
+  Generated: ich ich ich ich ich ich <unk>
 
 Sample 3
-  Source   : good night
-  Reference: gute nacht
-  Generated: gute nacht
+  Source   : you have time
+  Reference: du hast zeit
+  Generated: <unk> <unk>
 
 Sample 4
-  Source   : thank you
-  Reference: danke
-  Generated: danke
+  Source   : we need water
+  Reference: wir brauchen wasser
+  Generated: <unk>
 
 Sample 5
-  Source   : see you later
-  Reference: bis spaeter
-  Generated: bis spaeter
+  Source   : they see the house
+  Reference: sie sehen das haus
+  Generated: <unk>

@@ -29,6 +29,9 @@ class TranslationDataset(Dataset):
         src_ids: source tokens + <eos>
         tgt_input_ids: <bos> + target tokens
         tgt_output_ids: target tokens + <eos>
+
+    For larger datasets, tokenization and id conversion are done once in __init__
+    so that each epoch does not repeat Python-side preprocessing.
     """
 
     def __init__(
@@ -38,49 +41,75 @@ class TranslationDataset(Dataset):
         tgt_tokenizer: BasicTokenizer,
         src_vocab: Vocab,
         tgt_vocab: Vocab,
-        max_len: int,
+        max_src_len: int,
+        max_tgt_len: int,
     ) -> None:
-        self.pairs = list(pairs)
         self.src_tokenizer = src_tokenizer
         self.tgt_tokenizer = tgt_tokenizer
         self.src_vocab = src_vocab
         self.tgt_vocab = tgt_vocab
-        self.max_len = max_len
+        self.max_src_len = max_src_len
+        self.max_tgt_len = max_tgt_len
+        self.examples = self._preprocess_pairs(pairs)
 
     def __len__(self) -> int:
-        return len(self.pairs)
+        return len(self.examples)
 
-    def _truncate(self, tokens: List[str], reserved_tokens: int) -> List[str]:
-        return tokens[: self.max_len - reserved_tokens]
+    def _truncate(self, tokens: List[str], max_len: int, reserved_tokens: int) -> List[str]:
+        return tokens[: max_len - reserved_tokens]
+
+    def _preprocess_pairs(self, pairs: Sequence[Tuple[str, str]]) -> List[dict]:
+        examples = []
+        for src_text, tgt_text in pairs:
+            src_tokens = self._truncate(
+                self.src_tokenizer.tokenize(src_text),
+                max_len=self.max_src_len,
+                reserved_tokens=1,
+            )
+            tgt_tokens = self._truncate(
+                self.tgt_tokenizer.tokenize(tgt_text),
+                max_len=self.max_tgt_len,
+                reserved_tokens=1,
+            )
+
+            if not src_tokens or not tgt_tokens:
+                continue
+
+            src_ids = self.src_vocab.encode(src_tokens, add_eos=True)
+            tgt_input_ids = self.tgt_vocab.encode(tgt_tokens, add_bos=True)
+            tgt_output_ids = self.tgt_vocab.encode(tgt_tokens, add_eos=True)
+
+            examples.append(
+                {
+                    "src_ids": torch.tensor(src_ids, dtype=torch.long),
+                    "tgt_input_ids": torch.tensor(tgt_input_ids, dtype=torch.long),
+                    "tgt_output_ids": torch.tensor(tgt_output_ids, dtype=torch.long),
+                    "src_text": src_text,
+                    "tgt_text": tgt_text,
+                }
+            )
+        return examples
 
     def __getitem__(self, index: int) -> dict:
-        src_text, tgt_text = self.pairs[index]
-
-        src_tokens = self._truncate(self.src_tokenizer.tokenize(src_text), reserved_tokens=1)
-        tgt_tokens = self._truncate(self.tgt_tokenizer.tokenize(tgt_text), reserved_tokens=1)
-
-        src_ids = self.src_vocab.encode(src_tokens, add_eos=True)
-        tgt_input_ids = self.tgt_vocab.encode(tgt_tokens, add_bos=True)
-        tgt_output_ids = self.tgt_vocab.encode(tgt_tokens, add_eos=True)
-
-        return {
-            "src_ids": torch.tensor(src_ids, dtype=torch.long),
-            "tgt_input_ids": torch.tensor(tgt_input_ids, dtype=torch.long),
-            "tgt_output_ids": torch.tensor(tgt_output_ids, dtype=torch.long),
-            "src_text": src_text,
-            "tgt_text": tgt_text,
-        }
+        return self.examples[index]
 
 
-def build_collate_fn(pad_id: int) -> Callable[[List[dict]], dict]:
+def build_collate_fn(
+    src_pad_id: int,
+    tgt_pad_id: int,
+) -> Callable[[List[dict]], dict]:
     def collate_fn(batch: List[dict]) -> dict:
         batch_size = len(batch)
         src_max_len = max(item["src_ids"].size(0) for item in batch)
         tgt_max_len = max(item["tgt_input_ids"].size(0) for item in batch)
 
-        src_batch = torch.full((batch_size, src_max_len), pad_id, dtype=torch.long)
-        tgt_input_batch = torch.full((batch_size, tgt_max_len), pad_id, dtype=torch.long)
-        tgt_output_batch = torch.full((batch_size, tgt_max_len), pad_id, dtype=torch.long)
+        src_batch = torch.full((batch_size, src_max_len), src_pad_id, dtype=torch.long)
+        tgt_input_batch = torch.full((batch_size, tgt_max_len), tgt_pad_id, dtype=torch.long)
+        tgt_output_batch = torch.full(
+            (batch_size, tgt_max_len),
+            tgt_pad_id,
+            dtype=torch.long,
+        )
 
         src_texts = []
         tgt_texts = []
@@ -105,4 +134,3 @@ def build_collate_fn(pad_id: int) -> Callable[[List[dict]], dict]:
         }
 
     return collate_fn
-

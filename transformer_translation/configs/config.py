@@ -10,11 +10,14 @@ import torch
 @dataclass
 class Config:
     project_root: Path = Path(__file__).resolve().parent.parent
-    train_path: Path = project_root / "data" / "raw" / "train.tsv"
-    val_path: Path = project_root / "data" / "raw" / "val.tsv"
+    raw_dir: Path = project_root / "data" / "raw"
+    train_path: Path = raw_dir / "train.tsv"
+    val_path: Path = raw_dir / "val.tsv"
+    test_path: Path = raw_dir / "test.tsv"
     processed_dir: Path = project_root / "data" / "processed"
     src_vocab_path: Path = processed_dir / "src_vocab.json"
     tgt_vocab_path: Path = processed_dir / "tgt_vocab.json"
+    dataset_metadata_path: Path = processed_dir / "dataset_meta.json"
     outputs_dir: Path = project_root / "outputs"
     checkpoint_dir: Path = outputs_dir / "checkpoints"
     plot_dir: Path = outputs_dir / "plots"
@@ -25,9 +28,15 @@ class Config:
 
     src_lang: str = "en"
     tgt_lang: str = "de"
+    dataset_name: str = "iwslt2017_en_de"
+    max_train_samples: int = 80000
+    max_val_samples: int = 2000
+    max_test_samples: int = 2000
     lowercase: bool = True
-    min_freq: int = 1
-    max_len: int = 128
+    min_freq: int = 2
+    max_vocab_size: int = 32000
+    max_src_len: int = 80
+    max_tgt_len: int = 80
 
     d_model: int = 256
     num_encoder_layers: int = 4
@@ -40,21 +49,28 @@ class Config:
     ffn_activation: str = "gelu"
     rope_base: int = 10000
 
-    batch_size: int = 32
-    lr: float = 1e-4
+    batch_size: int = 64
+    lr: float = 2e-4
     weight_decay: float = 1e-4
-    epochs: int = 30
+    epochs: int = 6
     clip_grad_norm: float = 1.0
-    label_smoothing: float = 0.0
+    label_smoothing: float = 0.1
+    early_stopping_patience: int = 2
 
-    num_workers: int = 0
+    num_workers: int = 4 if os.name != "nt" else 0
+    pin_memory: bool = torch.cuda.is_available()
     seed: int = 42
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
-    max_decode_len: int = 50
+    max_decode_len: int = 80
     sample_count: int = 5
+
+    @property
+    def max_len(self) -> int:
+        return max(self.max_src_len, self.max_tgt_len)
 
     def ensure_dirs(self) -> None:
         for directory in (
+            self.raw_dir,
             self.processed_dir,
             self.checkpoint_dir,
             self.plot_dir,

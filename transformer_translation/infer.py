@@ -10,6 +10,36 @@ from models import TransformerTranslationModel
 from utils import BasicTokenizer, Vocab, make_padding_mask
 
 
+MODEL_CONFIG_KEYS = {
+    "d_model",
+    "num_encoder_layers",
+    "num_decoder_layers",
+    "num_q_heads",
+    "num_kv_heads",
+    "attention_type",
+    "d_ff",
+    "dropout",
+    "ffn_activation",
+    "rope_base",
+    "lowercase",
+    "max_src_len",
+    "max_tgt_len",
+    "max_decode_len",
+}
+
+
+def apply_saved_model_config(config: Config, saved_config: dict | None) -> Config:
+    if not saved_config:
+        return config
+
+    for key, value in saved_config.items():
+        if key in MODEL_CONFIG_KEYS and hasattr(config, key):
+            setattr(config, key, value)
+
+    config.device = "cuda" if torch.cuda.is_available() else "cpu"
+    return config
+
+
 def load_trained_model(
     config: Config | None = None,
 ) -> tuple[
@@ -28,6 +58,13 @@ def load_trained_model(
     if not config.src_vocab_path.exists() or not config.tgt_vocab_path.exists():
         raise FileNotFoundError("Vocabulary files are missing. Please run train.py first.")
 
+    checkpoint = torch.load(
+        config.checkpoint_path,
+        map_location=config.device,
+        weights_only=False,
+    )
+    config = apply_saved_model_config(config, checkpoint.get("config"))
+
     src_vocab = Vocab.load(config.src_vocab_path)
     tgt_vocab = Vocab.load(config.tgt_vocab_path)
 
@@ -37,11 +74,6 @@ def load_trained_model(
         src_pad_id=src_vocab.pad_id,
         tgt_pad_id=tgt_vocab.pad_id,
         config=config,
-    )
-    checkpoint = torch.load(
-        config.checkpoint_path,
-        map_location=config.device,
-        weights_only=False,
     )
     model.load_state_dict(checkpoint["model_state_dict"])
     model.to(config.device)
@@ -76,7 +108,7 @@ def translate_sentence(
     tgt_vocab: Vocab,
     config: Config,
 ) -> str:
-    src_tokens = src_tokenizer.tokenize(sentence)[: config.max_len - 1]
+    src_tokens = src_tokenizer.tokenize(sentence)[: config.max_src_len - 1]
     src_ids = torch.tensor(
         src_vocab.encode(src_tokens, add_eos=True),
         dtype=torch.long,

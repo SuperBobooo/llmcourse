@@ -15,16 +15,25 @@ class Vocab:
         self.stoi = {token: idx for idx, token in enumerate(self.itos)}
 
     @classmethod
-    def build(cls, tokenized_texts: Iterable[List[str]], min_freq: int = 1) -> "Vocab":
+    def build(
+        cls,
+        tokenized_texts: Iterable[List[str]],
+        min_freq: int = 1,
+        max_vocab_size: int | None = None,
+    ) -> "Vocab":
         counter = Counter()
         for tokens in tokenized_texts:
             counter.update(tokens)
 
         specials = [cls.PAD_TOKEN, cls.UNK_TOKEN, cls.BOS_TOKEN, cls.EOS_TOKEN]
         vocab_tokens = list(specials)
-        for token, freq in sorted(counter.items()):
+
+        sorted_items = sorted(counter.items(), key=lambda item: (-item[1], item[0]))
+        for token, freq in sorted_items:
             if freq >= min_freq and token not in specials:
                 vocab_tokens.append(token)
+            if max_vocab_size is not None and len(vocab_tokens) >= max_vocab_size:
+                break
         return cls(vocab_tokens)
 
     @property
@@ -90,4 +99,3 @@ class Vocab:
         with path.open("r", encoding="utf-8") as file:
             payload = json.load(file)
         return cls(payload["itos"])
-
