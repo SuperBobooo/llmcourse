@@ -1,0 +1,24 @@
+Sample 1
+  Source   : good afternoon
+  Reference: guten tag
+  Generated: sprichst du englisch
+
+Sample 2
+  Source   : i like coffee
+  Reference: ich mag kaffee
+  Generated: ich mag musik
+
+Sample 3
+  Source   : you have time
+  Reference: du hast zeit
+  Generated: du hast eine katze
+
+Sample 4
+  Source   : we need water
+  Reference: wir brauchen wasser
+  Generated: wir brauchen eine karte
+
+Sample 5
+  Source   : they see the house
+  Reference: sie sehen das haus
+  Generated: sie sehen die stadt

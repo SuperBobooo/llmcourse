@@ -1,0 +1,112 @@
+{
+  "edit_request": {
+    "source_text": "i like apples",
+    "target_text": "ich mag bananen",
+    "original_target_text": "ich mag aepfel"
+  },
+  "edit_success": {
+    "before_translation": "ich mag aepfel",
+    "after_translation": "ich mag bananen",
+    "target_text": "ich mag bananen",
+    "success_before": false,
+    "success_after": true
+  },
+  "case_assessment": {
+    "before_translation": "ich mag aepfel",
+    "contains_unk": false,
+    "is_existing_knowledge_case": true,
+    "case_type": "existing_knowledge_edit",
+    "note": "编辑前已经是完整翻译，更符合“修改已有知识”的实验设定。"
+  },
+  "locality": {
+    "unchanged_ratio": 1.0,
+    "changed_ratio": 0.0,
+    "retain_kl": 0.0052496143616735935,
+    "translations": [
+      {
+        "source": "i like bananas",
+        "reference": "ich mag bananen",
+        "before": "ich mag bananen",
+        "after": "ich mag bananen"
+      },
+      {
+        "source": "i like music",
+        "reference": "ich mag musik",
+        "before": "ich mag musik",
+        "after": "ich mag musik"
+      },
+      {
+        "source": "i like books",
+        "reference": "ich mag buecher",
+        "before": "ich mag buecher",
+        "after": "ich mag buecher"
+      },
+      {
+        "source": "i like coffee",
+        "reference": "ich mag kaffee",
+        "before": "ich mag musik",
+        "after": "ich mag musik"
+      },
+      {
+        "source": "i need a doctor",
+        "reference": "ich brauche einen arzt",
+        "before": "ich brauche einen arzt",
+        "after": "ich brauche einen arzt"
+      },
+      {
+        "source": "i want water",
+        "reference": "ich will wasser",
+        "before": "ich will wasser",
+        "after": "ich will wasser"
+      },
+      {
+        "source": "they like pizza",
+        "reference": "sie moegen pizza",
+        "before": "sie moegen pizza",
+        "after": "sie moegen pizza"
+      },
+      {
+        "source": "i see the house",
+        "reference": "ich sehe das haus",
+        "before": "ich sehe das haus",
+        "after": "ich sehe das haus"
+      },
+      {
+        "source": "i want bread",
+        "reference": "ich will brot",
+        "before": "ich will brot",
+        "after": "ich will brot"
+      },
+      {
+        "source": "i am fine",
+        "reference": "ich bin gut",
+        "before": "ich bin gut",
+        "after": "ich bin gut"
+      },
+      {
+        "source": "i have a dog",
+        "reference": "ich habe einen hund",
+        "before": "ich habe einen hund",
+        "after": "ich habe einen hund"
+      },
+      {
+        "source": "you like tea",
+        "reference": "du magst tee",
+        "before": "du magst tee",
+        "after": "du magst tee"
+      }
+    ]
+  },
+  "general_performance": {
+    "before_val": {
+      "loss": 2.1799042224884033,
+      "accuracy": 0.6
+    },
+    "after_val": {
+      "loss": 2.2115368843078613,
+      "accuracy": 0.5555555555555556
+    },
+    "delta_loss": 0.03163266181945801,
+    "delta_accuracy": -0.0444444444444444
+  }
+}

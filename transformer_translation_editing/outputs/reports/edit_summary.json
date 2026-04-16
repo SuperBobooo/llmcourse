@@ -1,0 +1,403 @@
+{
+  "edit_request": {
+    "source_text": "i like apples",
+    "target_text": "ich mag bananen",
+    "edit_scope": "lm_head",
+    "original_target_text": "ich mag aepfel"
+  },
+  "checkpoint_paths": {
+    "base_checkpoint_path": "D:\\llm\\transformer_translation_editing\\outputs\\checkpoints\\best_transformer_translation.pt",
+    "edited_checkpoint_path": "D:\\llm\\transformer_translation_editing\\outputs\\editing\\edited_transformer_translation.pt"
+  },
+  "case_assessment": {
+    "before_translation": "ich mag aepfel",
+    "contains_unk": false,
+    "is_existing_knowledge_case": true,
+    "case_type": "existing_knowledge_edit",
+    "note": "编辑前已经是完整翻译，更符合“修改已有知识”的实验设定。"
+  },
+  "selected_edit_step": 40,
+  "before_translation": "ich mag aepfel",
+  "best_step_translation": "ich mag bananen",
+  "after_translation": "ich mag bananen",
+  "before_val_metrics": {
+    "loss": 2.1799042224884033,
+    "accuracy": 0.6
+  },
+  "after_val_metrics": {
+    "loss": 2.2115368843078613,
+    "accuracy": 0.5555555555555556
+  },
+  "retain_pairs": [
+    [
+      "i like bananas",
+      "ich mag bananen"
+    ],
+    [
+      "i like music",
+      "ich mag musik"
+    ],
+    [
+      "i like books",
+      "ich mag buecher"
+    ],
+    [
+      "i like coffee",
+      "ich mag kaffee"
+    ],
+    [
+      "i need a doctor",
+      "ich brauche einen arzt"
+    ],
+    [
+      "i want water",
+      "ich will wasser"
+    ],
+    [
+      "they like pizza",
+      "sie moegen pizza"
+    ],
+    [
+      "i see the house",
+      "ich sehe das haus"
+    ],
+    [
+      "i want bread",
+      "ich will brot"
+    ],
+    [
+      "i am fine",
+      "ich bin gut"
+    ],
+    [
+      "i have a dog",
+      "ich habe einen hund"
+    ],
+    [
+      "you like tea",
+      "du magst tee"
+    ]
+  ],
+  "edit_history": [
+    {
+      "step": 1,
+      "edit_loss": 1.629022,
+      "locality_loss": -0.0,
+      "total_loss": 1.629022,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 2,
+      "edit_loss": 1.52649,
+      "locality_loss": 0.0003,
+      "total_loss": 1.52829,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 3,
+      "edit_loss": 1.42548,
+      "locality_loss": 0.000538,
+      "total_loss": 1.428706,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 4,
+      "edit_loss": 1.325314,
+      "locality_loss": 0.000694,
+      "total_loss": 1.32948,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 5,
+      "edit_loss": 1.225687,
+      "locality_loss": 0.000937,
+      "total_loss": 1.231311,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 6,
+      "edit_loss": 1.126576,
+      "locality_loss": 0.001194,
+      "total_loss": 1.133742,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 7,
+      "edit_loss": 1.028121,
+      "locality_loss": 0.001504,
+      "total_loss": 1.037142,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 8,
+      "edit_loss": 0.930575,
+      "locality_loss": 0.001839,
+      "total_loss": 0.941609,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 9,
+      "edit_loss": 0.834281,
+      "locality_loss": 0.002173,
+      "total_loss": 0.847322,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 10,
+      "edit_loss": 0.739669,
+      "locality_loss": 0.002531,
+      "total_loss": 0.754853,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 11,
+      "edit_loss": 0.647306,
+      "locality_loss": 0.002912,
+      "total_loss": 0.664776,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 12,
+      "edit_loss": 0.557955,
+      "locality_loss": 0.003305,
+      "total_loss": 0.577785,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 13,
+      "edit_loss": 0.472604,
+      "locality_loss": 0.003714,
+      "total_loss": 0.49489,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 14,
+      "edit_loss": 0.392462,
+      "locality_loss": 0.00414,
+      "total_loss": 0.4173,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 15,
+      "edit_loss": 0.318883,
+      "locality_loss": 0.004572,
+      "total_loss": 0.346316,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 16,
+      "edit_loss": 0.253196,
+      "locality_loss": 0.005003,
+      "total_loss": 0.283211,
+      "current_translation": "ich mag aepfel",
+      "current_success": false
+    },
+    {
+      "step": 17,
+      "edit_loss": 0.196462,
+      "locality_loss": 0.005416,
+      "total_loss": 0.228959,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 18,
+      "edit_loss": 0.149222,
+      "locality_loss": 0.005793,
+      "total_loss": 0.183981,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 19,
+      "edit_loss": 0.111353,
+      "locality_loss": 0.006116,
+      "total_loss": 0.148046,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 20,
+      "edit_loss": 0.082088,
+      "locality_loss": 0.006357,
+      "total_loss": 0.120231,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 21,
+      "edit_loss": 0.060193,
+      "locality_loss": 0.006507,
+      "total_loss": 0.099234,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 22,
+      "edit_loss": 0.044334,
+      "locality_loss": 0.006557,
+      "total_loss": 0.083675,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 23,
+      "edit_loss": 0.033154,
+      "locality_loss": 0.006518,
+      "total_loss": 0.072265,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 24,
+      "edit_loss": 0.025356,
+      "locality_loss": 0.006412,
+      "total_loss": 0.063826,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 25,
+      "edit_loss": 0.019913,
+      "locality_loss": 0.006265,
+      "total_loss": 0.057504,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 26,
+      "edit_loss": 0.016078,
+      "locality_loss": 0.006102,
+      "total_loss": 0.052692,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 27,
+      "edit_loss": 0.013326,
+      "locality_loss": 0.005948,
+      "total_loss": 0.049016,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 28,
+      "edit_loss": 0.011298,
+      "locality_loss": 0.00582,
+      "total_loss": 0.046219,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 29,
+      "edit_loss": 0.009748,
+      "locality_loss": 0.005724,
+      "total_loss": 0.044094,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 30,
+      "edit_loss": 0.008517,
+      "locality_loss": 0.005656,
+      "total_loss": 0.042454,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 31,
+      "edit_loss": 0.00751,
+      "locality_loss": 0.005607,
+      "total_loss": 0.041155,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 32,
+      "edit_loss": 0.006672,
+      "locality_loss": 0.005571,
+      "total_loss": 0.040097,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 33,
+      "edit_loss": 0.005961,
+      "locality_loss": 0.005542,
+      "total_loss": 0.039216,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 34,
+      "edit_loss": 0.00535,
+      "locality_loss": 0.005518,
+      "total_loss": 0.038459,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 35,
+      "edit_loss": 0.004817,
+      "locality_loss": 0.005494,
+      "total_loss": 0.037779,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 36,
+      "edit_loss": 0.004353,
+      "locality_loss": 0.005466,
+      "total_loss": 0.037151,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 37,
+      "edit_loss": 0.003951,
+      "locality_loss": 0.005435,
+      "total_loss": 0.036561,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 38,
+      "edit_loss": 0.003602,
+      "locality_loss": 0.005399,
+      "total_loss": 0.035994,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 39,
+      "edit_loss": 0.003296,
+      "locality_loss": 0.005356,
+      "total_loss": 0.035434,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    },
+    {
+      "step": 40,
+      "edit_loss": 0.003027,
+      "locality_loss": 0.005306,
+      "total_loss": 0.034866,
+      "current_translation": "ich mag bananen",
+      "current_success": true
+    }
+  ]
+}
